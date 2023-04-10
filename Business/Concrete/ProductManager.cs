@@ -1,13 +1,12 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System.Linq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Entities.DTOs;
 using Core.Utilities.Results;
 using Business.Constants;
+using Business.ValidationRules.FluentVaidation;
+using Core.CrossCuttingConcerns.Validation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -19,19 +18,16 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length < 2)
-            {
-                return new ErrorResult("Ürün ismi en az 2 karakter olmalıdır.");
-            }
             _productDal.Add(product);
             return new SuccessResult("Ürün eklendi");
         }
 
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour == 1)
+            if (DateTime.Now.Hour == 10)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
