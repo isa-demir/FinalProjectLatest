@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Interceptors
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = true, Inherited = true)]
     public abstract class MethodInterceptionBaseAttribute : Attribute, IInterceptor
     {
         //Öncelik demek -> hangi attribute önce çalışsın!
         public int Priority { get; set; }
 
-        public virtual void Intercept(IInvocation invocation)
-        {
+        public virtual void Intercept(IInvocation invocation) { }
 
-        }
     }
 }

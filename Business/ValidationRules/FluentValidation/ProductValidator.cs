@@ -1,12 +1,13 @@
 ﻿using Entities.Concrete;
 using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.ValidationRules.FluentVaidation
+namespace Business.ValidationRules.FluentValidation
 {
     public class ProductValidator : AbstractValidator<Product>
     {
@@ -17,12 +18,12 @@ namespace Business.ValidationRules.FluentVaidation
             RuleFor(p => p.UnitPrice).NotEmpty();
             RuleFor(p => p.UnitPrice).GreaterThan(0);
             RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1);
-            RuleFor(p => p.ProductName).Must(StartsWithA).WithMessage("Ürünler A harfi ile başlamalı.");
+            //RuleFor(p => p.ProductName).Must(StartWithA);
         }
-        //Kendi kuralımızı yadık.
-        private bool StartsWithA(string arg)
-        {
-            return arg.StartsWith("A");
-        }
+
+        //private bool StartWithA(string arg)
+        //{
+        //    return arg.StartsWith("A");
+        //}
     }
 }
