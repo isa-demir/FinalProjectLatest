@@ -20,7 +20,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
 
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
-
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
             var proxyOptions = new ProxyGenerationOptions { Selector = new AspectInterceptorSelector() };
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
